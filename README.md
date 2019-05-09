@@ -1,3 +1,7 @@
+## Fork:
+- Added week numbers. 
+- Fixed DateInput blur event date format bug (with a new dependency: fecha https://github.com/taylorhakes/fecha) . 
+
 # Datepicker
 
 [![Travis Build](https://img.shields.io/travis/charliekassel/vuejs-datepicker.svg)](https://travis-ci.org/charliekassel/vuejs-datepicker)
