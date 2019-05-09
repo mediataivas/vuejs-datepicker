@@ -40,6 +40,7 @@
 </template>
 <script>
 import { makeDateUtils } from '../utils/DateUtils'
+import fecha from 'fecha';
 export default {
   props: {
     selectedDate: Date,
@@ -130,7 +131,7 @@ export default {
      * called once the input is blurred
      */
     inputBlurred () {
-      if (this.typeable && isNaN(Date.parse(this.input.value))) {
+      if (this.typeable && isNaN(fecha.parse(this.input.value, this.format))) {
         this.clearDate()
         this.input.value = null
         this.typedDate = null
