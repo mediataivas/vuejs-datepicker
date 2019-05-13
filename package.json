@@ -30,7 +30,8 @@
     "serve": "rollup -c scripts/serve.js --watch",
     "test": "jest --config test/unit/jest.conf.js --coverage",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "prepare": "yarn build"
+    "prepare": "rimraf dist/* && babel-node scripts/build.js && babel-node scripts/build-locale.js",
+    "prepublishOnly": "yarn lint"
   },
   "pre-commit": [
     "lint",
