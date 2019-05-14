@@ -9,7 +9,8 @@ describe('DateInput', () => {
     wrapper = shallow(DateInput, {
       propsData: {
         selectedDate: new Date(2018, 2, 24),
-        format: 'dd MMM yyyy',
+        format: 'DD MMM YYYY',
+        formats: ['DD MMM YYYY'],
         translation: en
       }
     })

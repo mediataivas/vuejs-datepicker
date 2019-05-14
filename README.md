@@ -108,7 +108,8 @@ Inline always open version
 | value                        | Date\|String     |             | Date value of the datepicker             |
 | name                         | String           |             | Input name property                      |
 | id                           | String           |             | Input id                                 |
-| format                       | String\|Function | dd MMM yyyy | Date formatting string or function       |
+| format                       | String\|Function | DD MMM YYYY | Date formatting string or function       |
+| formats                      | Array            | \[format\]  | Accepted date input formats              |
 | full-month-name              | Boolean          | false       | To show the full month name              |
 | language                     | Object           | en          | Translation for days and months          |
 | disabled-dates               | Object           |             | See below for configuration              |

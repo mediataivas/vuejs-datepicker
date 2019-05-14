@@ -42,7 +42,7 @@
 
     <div class="example">
       <h3>Format datepicker</h3>
-      <datepicker :format="format"></datepicker>
+      <datepicker :format="format" :formats="[format]"></datepicker>
       <code>
         &lt;datepicker :format="format"&gt;&lt;/datepicker&gt;
       </code>
@@ -51,11 +51,11 @@
         <div class="form-group">
           <label>Format</label>
           <select v-model="format">
-            <option value="d MMM yyyy" selected>d MMM yyyy - e.g 12 Feb 2016</option>
-            <option value="d MMMM yyyy">d MMMM yyyy - e.g 12 February 2016</option>
-            <option value="yyyy-MM-dd">yyyy-MM-dd - e.g 2016-02-12</option>
-            <option value="dsu MMM yyyy">dsu MMM yyyy - e.g 12th Feb 2016</option>
-            <option value="D dsu MMM yyyy">D dsu MMM yyyy - e.g Sat 12th Feb 2016</option>
+            <option value="D MMM YYYY" selected>D MMM YYYY - e.g 12 Feb 2016</option>
+            <option value="D MMMM YYYY">D MMMM yyyy - e.g 12 February 2016</option>
+            <option value="YYYY-MM-DD">YYYY-MM-DD - e.g 2016-02-12</option>
+            <option value="Do MMM YYYY">Do MMM YYYY - e.g 12th Feb 2016</option>
+            <option value="D Do MMM YYYY">D Do MMM YYYY - e.g Sat 12th Feb 2016</option>
           </select>
         </div>
       </div>
@@ -265,7 +265,7 @@ export default {
   data () {
     return {
       styleInput: null,
-      format: 'd MMMM yyyy',
+      format: 'D MMMM YYYY',
       disabledDates: {},
       openDate: null,
       disabledFn: {

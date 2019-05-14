@@ -46,6 +46,7 @@ export default {
     selectedDate: Date,
     resetTypedDate: [Date],
     format: [String, Function],
+    formats: Array,
     translation: Object,
     inline: Boolean,
     id: String,
@@ -83,7 +84,7 @@ export default {
       }
       return typeof this.format === 'function'
         ? this.format(this.selectedDate)
-        : this.utils.formatDate(new Date(this.selectedDate), this.format, this.translation)
+        : fecha.format(this.selectedDate, this.format, this.fechaI18n)
     },
 
     computedInputClass () {
@@ -94,6 +95,19 @@ export default {
         return {'form-control': true, ...this.inputClass}
       }
       return this.inputClass
+    },
+
+    fechaI18n () {
+      if (this.translation) {
+        return {
+          dayNamesShort: this.translation.days,
+          dayNames: this.translation.days,
+          monthNamesShort: this.translation.monthsAbbr,
+          monthNames: this.translation.months,
+          DoFn: this.utils.getNthSuffix
+        }
+      }
+      return {}
     }
   },
   watch: {
@@ -119,10 +133,10 @@ export default {
       }
 
       if (this.typeable) {
-        const typedDate = Date.parse(this.input.value)
-        if (!isNaN(typedDate)) {
+        const typedDate = this.parseDate(this.input.value)
+        if (typedDate) {
           this.typedDate = this.input.value
-          this.$emit('typedDate', new Date(this.typedDate))
+          this.$emit('typedDate', typedDate)
         }
       }
     },
@@ -131,7 +145,7 @@ export default {
      * called once the input is blurred
      */
     inputBlurred () {
-      if (this.typeable && !fecha.parse(this.input.value, this.format)) {
+      if (this.typeable && !this.parseDate(this.input.value)) {
         this.clearDate()
         this.input.value = null
         this.typedDate = null
@@ -144,6 +158,25 @@ export default {
      */
     clearDate () {
       this.$emit('clearDate')
+    },
+    /**
+     * Tries to parse a date from available formats.
+     *
+     * @param dateStr Date string representation
+     * @return Date in UTC or null when date could not be parsed
+     */
+    parseDate (dateStr) {
+      for (let i = 0; i < this.formats.length; i++) {
+        try {
+          const date = fecha.parse(dateStr, this.formats[i], this.fechaI18n)
+          if (date) {
+            return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+          }
+        } catch (exception) {
+          // proceed with other formats
+        }
+      }
+      return null
     }
   },
   mounted () {

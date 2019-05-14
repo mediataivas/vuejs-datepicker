@@ -4,6 +4,7 @@
       :selectedDate="selectedDate"
       :resetTypedDate="resetTypedDate"
       :format="format"
+      :formats="formats ? formats : formats[format]"
       :translation="translation"
       :inline="inline"
       :id="id"
@@ -115,9 +116,21 @@ export default {
     name: String,
     refName: String,
     id: String,
+    /**
+     * Format for displayed dates. Uses Fecha date formats.
+     * https://www.npmjs.com/package/fecha#formatting-tokens
+     */
     format: {
       type: [String, Function],
-      default: 'dd MMM yyyy'
+      default: 'DD MMM YYYY'
+    },
+    /**
+     * Allowed date formats for parsing input.
+     * https://www.npmjs.com/package/fecha#formatting-tokens
+     */
+    formats: {
+      type: Array,
+      default: () => ['DD MMM YYYY']
     },
     language: {
       type: Object,

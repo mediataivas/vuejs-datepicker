@@ -25,7 +25,7 @@ describe('Datepicker mounted', () => {
     date = new Date(2016, 1, 15)
     wrapper = shallow(Datepicker, {
       propsData: {
-        format: 'yyyy-MM-dd',
+        format: 'YYYY-MM-DD',
         value: date
       }
     })
@@ -264,7 +264,8 @@ describe('Datepicker.vue using UTC', () => {
     // It's important to use the `mount` helper here
     wrapper = mount(Datepicker, {
       propsData: {
-        format: 'yyyy MM dd',
+        format: 'YYYY MM DD',
+        formats: ['YYYY MM DD'],
         value: ambiguousDate,
         useUtc: true // This should fail if `useUtc=false`
       }

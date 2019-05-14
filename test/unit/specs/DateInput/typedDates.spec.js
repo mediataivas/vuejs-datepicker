@@ -8,7 +8,8 @@ describe('DateInput', () => {
   beforeEach(() => {
     wrapper = shallow(DateInput, {
       propsData: {
-        format: 'dd MMM yyyy',
+        format: 'DD MMM YYYY',
+        formats: ['DD MMM YYYY', 'YYYY-MM-DD', 'DD.MM.YYYY'],
         translation: en,
         typeable: true
       }
@@ -37,6 +38,15 @@ describe('DateInput', () => {
     expect(wrapper.emitted().typedDate[0][0]).toBeInstanceOf(Date)
   })
 
+  it('accepts alternative input formats', () => {
+    const input = wrapper.find('input')
+    wrapper.vm.input.value = '24.04.2018'
+    input.trigger('keyup')
+    expect(wrapper.emitted().typedDate).toBeDefined()
+    expect(wrapper.emitted().typedDate[0][0]).toBeInstanceOf(Date)
+    expect(wrapper.emitted().typedDate[0][0]).toEqual(new Date(Date.UTC(2018, 3, 24)))
+  })
+
   it('emits closeCalendar when return is pressed', () => {
     const input = wrapper.find('input')
     const blurSpy = jest.spyOn(input.element, 'blur')
@@ -54,7 +64,7 @@ describe('DateInput', () => {
   it('doesn\'t emit the date if typeable=false', () => {
     const wrapper = shallow(DateInput, {
       propsData: {
-        format: 'dd MMM yyyy',
+        format: 'DD MMM YYYY',
         translation: en,
         typeable: false
       }
