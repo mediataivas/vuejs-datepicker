@@ -104,6 +104,16 @@ describe('DateUtils', () => {
     expect(DateUtils.getWeekNumber(new Date(2018, 9, 22))).toEqual(43)
     expect(DateUtils.getWeekNumber(new Date(2018, 9, 20))).toEqual(42)
     expect(DateUtils.getWeekNumber(new Date(2018, 9, 20), true)).toEqual(42)
+    expect(DateUtils.getWeekNumber(new Date(2020, 10, 4))).toEqual(45)
+    expect(DateUtils.getWeekNumber(new Date(2020, 11, 27))).toEqual(52)
+    expect(DateUtils.getWeekNumber(new Date(2020, 11, 31))).toEqual(53)
+    expect(DateUtils.getWeekNumber(new Date(2021, 0, 2))).toEqual(53)
+    expect(DateUtils.getWeekNumber(new Date(2021, 0, 4))).toEqual(1)
+    expect(DateUtils.getWeekNumber(new Date(2021, 0, 11))).toEqual(2)
+    expect(DateUtils.getWeekNumber(new Date(2021, 11, 31))).toEqual(52)
+    expect(DateUtils.getWeekNumber(new Date(2022, 0, 2))).toEqual(52)
+    expect(DateUtils.getWeekNumber(new Date(2022, 0, 3))).toEqual(1)
+    expect(DateUtils.getWeekNumber(new Date(2022, 0, 10))).toEqual(2)
   })
 
   it('calendarweek equals cw', () => {
